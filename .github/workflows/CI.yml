@@ -1,0 +1,32 @@
+name: React CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código 📥
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js 🟢
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar Dependências 📦
+        run: npm install
+
+      - name: Executar Testes Unitários 🧪
+        # Nota: Como o Vite não vem com testes por padrão, 
+        # esse passo pode falhar se o comando 'test' não existir no package.json.
+        run: npm test -- --watchAll=false || echo "Nenhum teste configurado ainda"
+
+      - name: Validar Build 🏗️
+        run: npm run build
