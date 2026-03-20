@@ -1,0 +1,29 @@
+name: React CD (Deploy to GitHub Pages)
+
+on:
+  push:
+    branches: [ "main" ] # O deploy só acontece quando a main é atualizada
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código 📥
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js 🟢
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar e Build 🏗️
+        run: |
+          npm install
+          npm run build
+
+      - name: Deploy para o GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist # O Vite gera os arquivos na pasta 'dist'
+          branch: gh-pages # Branch onde o site ficará hospedado
