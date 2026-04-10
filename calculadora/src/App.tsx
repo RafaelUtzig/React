@@ -1,82 +1,62 @@
-// src/App.tsx
+import { useState } from 'react';
 import './App.css';
-import { Contador } from './components/Contador'; // Importando o nosso novo componente!
 
-// ==========================================
-// 1. COMPONENTES DA CALCULADORA
-// ==========================================
-
-// Visor da Calculadora
-const Painel = () => {
-  return (
-    <div className="painel">
-      0.75
-    </div>
-  );
-};
-
-// Botão da Calculadora (com TypeScript Interface)
-interface BotaoProps {
-  tipo: string;
-  digito: string;
-}
-
-const Botao = (props: BotaoProps) => {
-  return (
-    <div className={props.tipo}>
-      {props.digito}
-    </div>
-  );
-};
-
-// ==========================================
-// 2. APLICAÇÃO PRINCIPAL (APP)
-// ==========================================
-
+/**
+ * Componente principal da aplicação.
+ * Renderiza a tela de login e gerencia a validação das credenciais de acesso.
+ */
 function App() {
-  return (
-    /* O container-central usa o Flexbox que configuramos no CSS para alinhar lado a lado */
-    <div className="container-central">
-      
-      {/* --------------------------------- */}
-      {/* PROJETO 1: Calculadora Estática   */}
-      {/* --------------------------------- */}
-      <div className="painel-botoes">
-        <Painel />
-        
-        {/* Linha 1 */}
-        <Botao tipo="botao-ac" digito="AC" />
-        <Botao tipo="botao-operacao" digito="/" />
-        
-        {/* Linha 2 */}
-        <Botao tipo="botao-numero" digito="7" />
-        <Botao tipo="botao-numero" digito="8" />
-        <Botao tipo="botao-numero" digito="9" />
-        <Botao tipo="botao-operacao" digito="*" />
-        
-        {/* Linha 3 */}
-        <Botao tipo="botao-numero" digito="4" />
-        <Botao tipo="botao-numero" digito="5" />
-        <Botao tipo="botao-numero" digito="6" />
-        <Botao tipo="botao-operacao" digito="-" />
-        
-        {/* Linha 4 */}
-        <Botao tipo="botao-numero" digito="1" />
-        <Botao tipo="botao-numero" digito="2" />
-        <Botao tipo="botao-numero" digito="3" />
-        <Botao tipo="botao-operacao" digito="+" />
+  // Estados para armazenar os valores digitados nos campos de input
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  
+  // Estado responsável por armazenar a mensagem de feedback visual para o usuário
+  const [mensagem, setMensagem] = useState('');
 
-        {/* Linha 5 (A linha final do botão zero!) */}
-        <Botao tipo="botao-zero" digito="0" />
-        <Botao tipo="botao-numero" digito="." />
-        <Botao tipo="botao-operacao" digito="=" />
+  /**
+   * Função para validar os dados inseridos.
+   * Acionada no evento onClick do botão "Acessar".
+   */
+  const handleLogin = () => {
+    // Verifica se as credenciais coincidem com as exigidas na especificação
+    if (email === 'eduardo.lino@pucpr.br' && senha === '123456') {
+      setMensagem('Acessado com sucesso!');
+    } else {
+      setMensagem('Usuário ou senha incorretos!');
+    }
+  };
+
+  return (
+    <div className="login-container">
+      <h1>Login</h1>
+
+      <div className="form-group">
+        {/* Campo controlado do e-mail */}
+        <input
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="E-mail"
+        />
+        
+        {/* Campo controlado da senha */}
+        <input
+          type="password"
+          value={senha}
+          onChange={(e) => setSenha(e.target.value)}
+          placeholder="Senha"
+        />
+
+        {/* Botão que dispara a função de validação */}
+        <button onClick={handleLogin}>
+          Acessar
+        </button>
       </div>
 
-      {/* --------------------------------- */}
-      {/* PROJETO 2: Contador com State     */}
-      {/* --------------------------------- */}
-      <Contador />
-
+      {/* Renderização da label de feedback. A tag só recebe conteúdo se o state 'mensagem' for preenchido */}
+      <p className="feedback-message">
+        {mensagem}
+      </p>
     </div>
   );
 }
