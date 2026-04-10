@@ -1,64 +1,75 @@
-/* Reset padrão de layout da página */
+/* Reset e fundo padrão */
 body {
     margin: 0;
-    padding: 30px;
-    background-color: white;
-    color: black;
+    padding: 0;
+    background-color: #f4f4f9;
     font-family: Arial, sans-serif;
+    color: #333;
 }
 
-/* Ajuste do container raiz para ocupação total sem flexbox nativo */
 #root {
-    display: block; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     width: 100%;
 }
 
-/* Container raiz do componente de login */
-.login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; 
+/* Container padrão para todas as páginas */
+.page-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
 }
 
-/* Tipografia do título */
 h1 {
-    font-size: 28px;
-    margin-bottom: 20px;
     margin-top: 0;
+    color: #2c3e50;
 }
 
-/* Agrupamento em bloco para os elementos de formulário */
-.form-group {
+/* Caixa para exibir as informações de contato/sobre */
+.info-card {
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.info-card p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+/* Estilizando os Links para parecerem botões */
+.button-group {
     display: flex;
-    flex-direction: column;
-    gap: 5px; 
-    width: 250px;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
 }
 
-/* Estilização base dos campos de entrada */
-input {
-    padding: 6px;
-    font-size: 16px;
-    border: 1px solid #777;
+.nav-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-top: 15px;
 }
 
-/* Botão de submissão do login */
-button {
-    margin-top: 5px;
-    padding: 6px 10px;
-    font-size: 16px;
-    cursor: pointer;
-    width: 90px;
-    border: 1px solid #777;
-    background-color: #efefef;
+.nav-button:hover {
+    background-color: #2980b9;
 }
 
-button:hover {
-    background-color: #ddd;
-}
-
-/* Label de resposta do estado da autenticação */
-.feedback-message {
-    margin-top: 30px;
-    font-size: 22px;
+/* Estilo específico para a página de erro */
+.error-page h1 {
+    color: #e74c3c;
 }
