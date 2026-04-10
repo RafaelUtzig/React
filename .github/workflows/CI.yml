@@ -21,12 +21,13 @@ jobs:
           node-version: '20'
 
       - name: Instalar Dependências 📦
+        working-directory: ./calculadora # Entra na pasta antes de rodar o npm
         run: npm install
 
       - name: Executar Testes Unitários 🧪
-        # Nota: Como o Vite não vem com testes por padrão, 
-        # esse passo pode falhar se o comando 'test' não existir no package.json.
+        working-directory: ./calculadora # Entra na pasta
         run: npm test -- --watchAll=false || echo "Nenhum teste configurado ainda"
 
       - name: Validar Build 🏗️
+        working-directory: ./calculadora # Entra na pasta
         run: npm run build
