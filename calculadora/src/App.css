@@ -1,165 +1,64 @@
-/* ==========================================
-   1. RESET E CONFIGURAÇÃO DA PÁGINA (VITE)
-   ========================================== */
+/* Reset padrão de layout da página */
 body {
     margin: 0;
-    padding: 0;
-    background-color: #e0e0e0;
+    padding: 30px;
+    background-color: white;
+    color: black;
     font-family: Arial, sans-serif;
 }
 
-/* O Vite coloca tudo dentro desta div. Ela precisa de ocupar 100% da altura! */
+/* Ajuste do container raiz para ocupação total sem flexbox nativo */
 #root {
+    display: block; 
     width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-/* O nosso contentor que vai segurar os dois projetos lado a lado */
-.container-central {
+/* Container raiz do componente de login */
+.login-container {
     display: flex;
-    flex-direction: row; 
-    flex-wrap: wrap; 
-    justify-content: center;
+    flex-direction: column;
     align-items: flex-start; 
-    gap: 80px; /* O espaço entre a Calculadora e o Contador */
-    width: 100%;
-    max-width: 1200px;
-    padding: 20px;
-    box-sizing: border-box;
 }
 
-/* ==========================================
-   2. ESTILOS DA CALCULADORA (PROJETO 1)
-   ========================================== */
-.painel {
-    background-color: #666666; 
-    color: white;
-    width: 200px;
-    height: 80px; 
-    text-align: right;
-    font-size: 36px;
+/* Tipografia do título */
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+/* Agrupamento em bloco para os elementos de formulário */
+.form-group {
     display: flex;
-    align-items: flex-end; 
-    justify-content: flex-end;
-    padding: 10px;
-    box-sizing: border-box;
+    flex-direction: column;
+    gap: 5px; 
+    width: 250px;
 }
 
-.painel-botoes {
-    width: 200px;
-    height: 330px; 
-    background-color: #ccc; 
-    border: 1px solid #888;
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.3); /* Sombra para destacar */
+/* Estilização base dos campos de entrada */
+input {
+    padding: 6px;
+    font-size: 16px;
+    border: 1px solid #777;
 }
 
-.botao-ac {
-    width: 150px;
-    height: 50px;
-    background-color: #f2f2f2; 
-    font-size: 20px;
-    text-align: center;
-    line-height: 50px;
-    float: left;
-    color: black;
-    border: 1px solid #ccc; 
-    box-sizing: border-box;
-    cursor: pointer;
-}
-
-.botao-zero {
-    width: 100px; 
-    height: 50px;
-    background-color: #f2f2f2;
-    font-size: 20px;
-    text-align: center;
-    line-height: 50px;
-    float: left;
-    color: black;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    cursor: pointer;
-}
-
-.botao-numero {
-    width: 50px;
-    height: 50px;
-    background-color: #f2f2f2; 
-    font-size: 20px;
-    text-align: center;
-    line-height: 50px;
-    float: left;
-    color: black;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    cursor: pointer;
-}
-
-.botao-operacao {
-    width: 50px;
-    height: 50px;
-    background-color: #f5923e; 
-    font-size: 20px;
-    text-align: center;
-    line-height: 50px;
-    float: left;
-    color: white;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    cursor: pointer;
-}
-
-/* Efeito Hover nos botões da calculadora */
-.botao-numero:hover, .botao-ac:hover, .botao-operacao:hover, .botao-zero:hover {
-    filter: brightness(1.1);
-}
-
-/* ==========================================
-   3. ESTILOS DO CONTADOR (PROJETO 2)
-   ========================================== */
-.caixa-contador {
-    background-color: white;
-    padding: 30px 40px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
-    text-align: center;
-    min-width: 300px;
-}
-
-.botoes-contador {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 25px;
-    margin-top: 20px;
-}
-
-.btn-acao, .btn-zerar {
-    padding: 12px 18px;
+/* Botão de submissão do login */
+button {
+    margin-top: 5px;
+    padding: 6px 10px;
     font-size: 16px;
     cursor: pointer;
-    border: none;
-    border-radius: 6px;
-    color: white;
-    font-weight: bold;
-    transition: background-color 0.2s;
+    width: 90px;
+    border: 1px solid #777;
+    background-color: #efefef;
 }
 
-.btn-acao { background-color: #007bff; }
-.btn-acao:hover { background-color: #0056b3; }
+button:hover {
+    background-color: #ddd;
+}
 
-.btn-zerar { background-color: #dc3545; }
-.btn-zerar:hover { background-color: #a71d2a; }
-
-.label-valor {
-    font-size: 38px;
-    font-weight: bold;
-    color: #333;
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    border: 2px dashed #ccc;
+/* Label de resposta do estado da autenticação */
+.feedback-message {
+    margin-top: 30px;
+    font-size: 22px;
 }
