@@ -1,4 +1,4 @@
-name: React CD (Deploy to GitHub Pages)
+name: React CD (Deploy to GitHub Pages & DockerHub)
 
 on:
   push:
@@ -11,7 +11,8 @@ permissions:
   contents: write
 
 jobs:
-  deploy:
+  # Job 1: Publica o site no GitHub Pages (seu código original mantido)
+  deploy-pages:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +25,7 @@ jobs:
           node-version: '20'
 
       - name: Instalar e Build 🏗️
-        working-directory: ./calculadora # Entra na pasta
+        working-directory: ./calculadora
         run: |
           npm install
           npm run build
@@ -32,5 +33,28 @@ jobs:
       - name: Deploy para o GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: calculadora/dist # O robô precisa de saber que a dist está dentro da pasta calculadora!
+          folder: calculadora/dist
           branch: gh-pages
+
+  # Job 2: Publica a imagem no DockerHub (Desafio Extra)
+  publish-docker:
+    runs-on: ubuntu-latest
+    # A linha abaixo garante que a imagem só vai pro DockerHub quando o código for para a main (ignora PRs)
+    if: github.ref == 'refs/heads/main' 
+    
+    steps:
+      - name: Checkout do código 📥
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub 🐳
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          
+      - name: Build and push Docker image 📦
+        uses: docker/build-push-action@v5
+        with:
+          context: ./calculadora # Aponta para a subpasta onde está o seu Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/calculadora:latest
