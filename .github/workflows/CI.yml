@@ -25,8 +25,8 @@ jobs:
         run: npm install
 
       - name: Executar Testes Unitários 🧪
-        working-directory: ./calculadora # Entra na pasta
-        run: npm test -- --watchAll=false || echo "Nenhum teste configurado ainda"
+        working-directory: ./calculadora
+        run: npm test
 
       - name: Validar Build 🏗️
         working-directory: ./calculadora # Entra na pasta
