@@ -36,6 +36,14 @@ jobs:
           folder: calculadora/dist
           branch: gh-pages
 
+      - name: Enviar alerta no Discord 📢
+        if: always()
+        run: |
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d '{"content": "🤖 **Alerta do GitHub Actions!**\nUma nova ação ocorreu no repositório!\n**Status do Job:** ${{ job.status }}\n**Branch:** ${{ github.ref_name }}\n**Repositório:** ${{ github.repository }}"}' \
+          ${{ secrets.DISCORD_WEBHOOK }}
+
   # Job 2: Publica a imagem no DockerHub (Desafio Extra)
   publish-docker:
     runs-on: ubuntu-latest
