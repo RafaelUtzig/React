@@ -1,20 +1,16 @@
-// Removida a importação 'Switch' que daria erro na versão atual
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
-import Home from './paginas/Home';
-import Sobre from './paginas/Sobre';
-import Contato from './paginas/Contato';
-import NotFound from './paginas/NotFound';
+import Login from './paginas/Login';
+import Cadastro from './paginas/Cadastro';
+import Principal from './paginas/Principal';
 
 const Rotas = () => {
     return (
         <BrowserRouter>
             <Routes>
-                {/* O exact={true} é uma prática antiga, mas mantive para ficar igual ao do professor */}
-                <Route path="/" element={<Home/>} />
-                <Route path="/sobre" element={<Sobre/>} />
-                <Route path="/contato" element={<Contato/>} />
-                <Route path="*" element={<NotFound/>} />
+                {/* A página inicial será o Login */}
+                <Route path="/" element={<Login />} />
+                <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="/principal" element={<Principal />} />
             </Routes>
         </BrowserRouter>
     )
