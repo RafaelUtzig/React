@@ -5,9 +5,8 @@ import Principal from './paginas/Principal';
 
 const Rotas = () => {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/React">
             <Routes>
-                {/* A página inicial será o Login */}
                 <Route path="/" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/principal" element={<Principal />} />
